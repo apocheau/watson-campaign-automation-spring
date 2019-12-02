@@ -4,132 +4,14 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Configuration;
 
-import com.github.ka4ok85.wca.command.AddContactToContactListCommand;
-import com.github.ka4ok85.wca.command.AddContactToProgramCommand;
-import com.github.ka4ok85.wca.command.AddListColumnCommand;
-import com.github.ka4ok85.wca.command.AddRecipientCommand;
-import com.github.ka4ok85.wca.command.CalculateQueryCommand;
-import com.github.ka4ok85.wca.command.CreateContactListCommand;
-import com.github.ka4ok85.wca.command.CreateTableCommand;
-import com.github.ka4ok85.wca.command.DeleteListCommand;
-import com.github.ka4ok85.wca.command.DeleteRelationalTableDataCommand;
-import com.github.ka4ok85.wca.command.RawRecipientDataExportCommand;
-import com.github.ka4ok85.wca.command.DeleteTableCommand;
-import com.github.ka4ok85.wca.command.DoubleOptInRecipientCommand;
-import com.github.ka4ok85.wca.command.ExportListCommand;
-import com.github.ka4ok85.wca.command.ExportMailingTemplateCommand;
-import com.github.ka4ok85.wca.command.ExportTableCommand;
-import com.github.ka4ok85.wca.command.GetAggregateTrackingForMailingCommand;
-import com.github.ka4ok85.wca.command.GetAggregateTrackingForOrgCommand;
-import com.github.ka4ok85.wca.command.GetAggregateTrackingForUserCommand;
-import com.github.ka4ok85.wca.command.GetFolderPathCommand;
-import com.github.ka4ok85.wca.command.GetListMetaDataCommand;
-import com.github.ka4ok85.wca.command.GetListsCommand;
-import com.github.ka4ok85.wca.command.GetMailingTemplatesCommand;
-import com.github.ka4ok85.wca.command.GetReportIdByDateCommand;
-import com.github.ka4ok85.wca.command.GetSentMailingsForListCommand;
-import com.github.ka4ok85.wca.command.GetSentMailingsForOrgCommand;
-import com.github.ka4ok85.wca.command.GetSentMailingsForUserCommand;
-import com.github.ka4ok85.wca.command.ImportListCommand;
-import com.github.ka4ok85.wca.command.ImportTableCommand;
-import com.github.ka4ok85.wca.command.InsertUpdateRelationalTableCommand;
-import com.github.ka4ok85.wca.command.PreviewMailingCommand;
-import com.github.ka4ok85.wca.command.JoinTableCommand;
-import com.github.ka4ok85.wca.command.ListRecipientMailingsCommand;
-import com.github.ka4ok85.wca.command.OptOutRecipientCommand;
-import com.github.ka4ok85.wca.command.PurgeDataCommand;
-import com.github.ka4ok85.wca.command.PurgeTableCommand;
-import com.github.ka4ok85.wca.command.RemoveRecipientCommand;
-import com.github.ka4ok85.wca.command.SelectRecipientDataCommand;
-import com.github.ka4ok85.wca.command.UpdateRecipientCommand;
-import com.github.ka4ok85.wca.command.WebTrackingDataExportCommand;
-import com.github.ka4ok85.wca.command.SetColumnValueCommand;
+import com.github.ka4ok85.wca.command.*;
+import com.github.ka4ok85.wca.options.*;
+import com.github.ka4ok85.wca.response.*;
+
 import com.github.ka4ok85.wca.config.SpringConfig;
 import com.github.ka4ok85.wca.oauth.OAuthClient;
 import com.github.ka4ok85.wca.oauth.OAuthClientImplementation;
-import com.github.ka4ok85.wca.options.AddContactToContactListOptions;
-import com.github.ka4ok85.wca.options.AddContactToProgramOptions;
-import com.github.ka4ok85.wca.options.AddListColumnOptions;
-import com.github.ka4ok85.wca.options.AddRecipientOptions;
-import com.github.ka4ok85.wca.options.CalculateQueryOptions;
-import com.github.ka4ok85.wca.options.CreateContactListOptions;
-import com.github.ka4ok85.wca.options.CreateTableOptions;
-import com.github.ka4ok85.wca.options.DeleteListOptions;
-import com.github.ka4ok85.wca.options.DeleteRelationalTableDataOptions;
-import com.github.ka4ok85.wca.options.DeleteTableOptions;
-import com.github.ka4ok85.wca.options.DoubleOptInRecipientOptions;
-import com.github.ka4ok85.wca.options.ExportListOptions;
-import com.github.ka4ok85.wca.options.ExportMailingTemplateOptions;
-import com.github.ka4ok85.wca.options.ExportTableOptions;
-import com.github.ka4ok85.wca.options.GetAggregateTrackingForMailingOptions;
-import com.github.ka4ok85.wca.options.GetAggregateTrackingForOrgOptions;
-import com.github.ka4ok85.wca.options.GetAggregateTrackingForUserOptions;
-import com.github.ka4ok85.wca.options.GetFolderPathOptions;
-import com.github.ka4ok85.wca.options.GetListMetaDataOptions;
-import com.github.ka4ok85.wca.options.GetListsOptions;
-import com.github.ka4ok85.wca.options.GetMailingTemplatesOptions;
-import com.github.ka4ok85.wca.options.GetReportIdByDateOptions;
-import com.github.ka4ok85.wca.options.GetSentMailingsForListOptions;
-import com.github.ka4ok85.wca.options.GetSentMailingsForOrgOptions;
-import com.github.ka4ok85.wca.options.GetSentMailingsForUserOptions;
-import com.github.ka4ok85.wca.options.ImportListOptions;
-import com.github.ka4ok85.wca.options.ImportTableOptions;
-import com.github.ka4ok85.wca.options.InsertUpdateRelationalTableOptions;
-import com.github.ka4ok85.wca.options.JoinTableOptions;
-import com.github.ka4ok85.wca.options.ListRecipientMailingsOptions;
-import com.github.ka4ok85.wca.options.OptOutRecipientOptions;
-import com.github.ka4ok85.wca.options.PreviewMailingOptions;
-import com.github.ka4ok85.wca.options.PurgeDataOptions;
-import com.github.ka4ok85.wca.options.PurgeTableOptions;
-import com.github.ka4ok85.wca.options.RawRecipientDataExportOptions;
-import com.github.ka4ok85.wca.options.RemoveRecipientOptions;
-import com.github.ka4ok85.wca.options.SelectRecipientDataOptions;
-import com.github.ka4ok85.wca.options.SetColumnValueOptions;
-import com.github.ka4ok85.wca.options.UpdateRecipientOptions;
-import com.github.ka4ok85.wca.options.WebTrackingDataExportOptions;
-import com.github.ka4ok85.wca.response.AddContactToContactListResponse;
-import com.github.ka4ok85.wca.response.AddContactToProgramResponse;
-import com.github.ka4ok85.wca.response.AddListColumnResponse;
-import com.github.ka4ok85.wca.response.AddRecipientResponse;
-import com.github.ka4ok85.wca.response.CalculateQueryResponse;
-import com.github.ka4ok85.wca.response.CreateContactListResponse;
-import com.github.ka4ok85.wca.response.CreateTableResponse;
-import com.github.ka4ok85.wca.response.DeleteListResponse;
-import com.github.ka4ok85.wca.response.DeleteRelationalTableDataResponse;
-import com.github.ka4ok85.wca.response.DeleteTableResponse;
-import com.github.ka4ok85.wca.response.DoubleOptInRecipientResponse;
-import com.github.ka4ok85.wca.response.ExportListResponse;
-import com.github.ka4ok85.wca.response.ExportMailingTemplateResponse;
-import com.github.ka4ok85.wca.response.ExportTableResponse;
-import com.github.ka4ok85.wca.response.GetAggregateTrackingForMailingResponse;
-import com.github.ka4ok85.wca.response.GetAggregateTrackingForOrgResponse;
-import com.github.ka4ok85.wca.response.GetAggregateTrackingForUserResponse;
-import com.github.ka4ok85.wca.response.GetFolderPathResponse;
-import com.github.ka4ok85.wca.response.GetListMetaDataResponse;
-import com.github.ka4ok85.wca.response.GetListsResponse;
-import com.github.ka4ok85.wca.response.GetMailingTemplatesResponse;
-import com.github.ka4ok85.wca.response.GetReportIdByDateResponse;
-import com.github.ka4ok85.wca.response.GetSentMailingsForListResponse;
-import com.github.ka4ok85.wca.response.GetSentMailingsForOrgResponse;
-import com.github.ka4ok85.wca.response.GetSentMailingsForUserResponse;
-import com.github.ka4ok85.wca.response.ImportListResponse;
-import com.github.ka4ok85.wca.response.ImportTableResponse;
-import com.github.ka4ok85.wca.response.InsertUpdateRelationalTableResponse;
-import com.github.ka4ok85.wca.response.JoinTableResponse;
-import com.github.ka4ok85.wca.response.ListRecipientMailingsResponse;
-import com.github.ka4ok85.wca.response.OptOutRecipientResponse;
-import com.github.ka4ok85.wca.response.PreviewMailingResponse;
-import com.github.ka4ok85.wca.response.PurgeDataResponse;
-import com.github.ka4ok85.wca.response.PurgeTableResponse;
-import com.github.ka4ok85.wca.response.RawRecipientDataExportResponse;
-import com.github.ka4ok85.wca.response.RemoveRecipientResponse;
-import com.github.ka4ok85.wca.response.ResponseContainer;
-import com.github.ka4ok85.wca.response.SelectRecipientDataResponse;
-import com.github.ka4ok85.wca.response.SetColumnValueResponse;
-import com.github.ka4ok85.wca.response.UpdateRecipientResponse;
-import com.github.ka4ok85.wca.response.WebTrackingDataExportResponse;
 import com.github.ka4ok85.wca.sftp.SFTP;
-
 import org.springframework.retry.annotation.*;
 
 @Configuration
@@ -160,6 +42,44 @@ public class Engage {
 	private DeleteRelationalTableDataCommand deleteRelationalTableDataBean = getApplicationContext()
 			.getBean(DeleteRelationalTableDataCommand.class);
 	private PurgeTableCommand purgeTableBean = getApplicationContext().getBean(PurgeTableCommand.class);
+	private RawRecipientDataExportCommand rawRecipientDataExportBean = getApplicationContext()
+			.getBean(RawRecipientDataExportCommand.class);
+	private AddListColumnCommand addListColumnBean = getApplicationContext().getBean(AddListColumnCommand.class);
+	private SetColumnValueCommand setColumnValueBean = getApplicationContext().getBean(SetColumnValueCommand.class);
+	private ScheduleMailingCommand scheduleMailingBean = getApplicationContext().getBean(ScheduleMailingCommand.class);
+	private DeleteTableCommand deleteTableBean = getApplicationContext().getBean(DeleteTableCommand.class);
+	private CalculateQueryCommand calculateQueryBean = getApplicationContext().getBean(CalculateQueryCommand.class);
+	private GetListMetaDataCommand getListMetaDataBean = getApplicationContext().getBean(GetListMetaDataCommand.class);
+	private GetMailingTemplatesCommand getMailingTemplatesBean = getApplicationContext()
+			.getBean(GetMailingTemplatesCommand.class);
+	private PurgeDataCommand purgeDataBean = getApplicationContext().getBean(PurgeDataCommand.class);
+	private GetReportIdByDateCommand getReportIdByDateBean = getApplicationContext()
+			.getBean(GetReportIdByDateCommand.class);
+	private GetSentMailingsForOrgCommand getSentMailingsForOrgBean = getApplicationContext()
+			.getBean(GetSentMailingsForOrgCommand.class);
+	private GetSentMailingsForUserCommand getSentMailingsForUserBean = getApplicationContext()
+			.getBean(GetSentMailingsForUserCommand.class);
+	private GetSentMailingsForListCommand getSentMailingsForListBean = getApplicationContext()
+			.getBean(GetSentMailingsForListCommand.class);
+	private ExportMailingTemplateCommand exportMailingTemplateBean = getApplicationContext()
+			.getBean(ExportMailingTemplateCommand.class);
+	private AddContactToContactListCommand addContactToContactListBean = getApplicationContext()
+			.getBean(AddContactToContactListCommand.class);
+	private AddContactToProgramCommand addContactToProgramBean = getApplicationContext()
+			.getBean(AddContactToProgramCommand.class);
+	private GetAggregateTrackingForOrgCommand getAggregateTrackingForOrgBean = getApplicationContext()
+			.getBean(GetAggregateTrackingForOrgCommand.class);
+	private GetAggregateTrackingForMailingCommand getAggregateTrackingForMailingBean = getApplicationContext()
+			.getBean(GetAggregateTrackingForMailingCommand.class);
+	private GetAggregateTrackingForUserCommand getAggregateTrackingForUserBean = getApplicationContext()
+			.getBean(GetAggregateTrackingForUserCommand.class);
+	private ImportListCommand importListBean = getApplicationContext().getBean(ImportListCommand.class);
+	private ImportTableCommand importTableBean = getApplicationContext().getBean(ImportTableCommand.class);
+	private ListRecipientMailingsCommand listRecipientMailingsBean = getApplicationContext()
+			.getBean(ListRecipientMailingsCommand.class);
+	private WebTrackingDataExportCommand webTrackingDataExportBean = getApplicationContext()
+			.getBean(WebTrackingDataExportCommand.class);
+	private PreviewMailingCommand previewMailingBean = getApplicationContext().getBean(PreviewMailingCommand.class);
 
 	private static AnnotationConfigApplicationContext applicationContext;
 	{
@@ -310,132 +230,119 @@ public class Engage {
 	}
 
 	public ResponseContainer<DeleteTableResponse> deleteTable(DeleteTableOptions options) {
-		DeleteTableCommand deleteTable = getApplicationContext().getBean(DeleteTableCommand.class);
-		deleteTable.setoAuthClient(oAuthClient);
-		deleteTable.setSftp(sftp);
-		ResponseContainer<DeleteTableResponse> result = deleteTable.executeCommand(options);
+		deleteTableBean.setoAuthClient(oAuthClient);
+		deleteTableBean.setSftp(sftp);
+		ResponseContainer<DeleteTableResponse> result = deleteTableBean.executeCommand(options);
 
 		return result;
 	}
 
 	public ResponseContainer<CalculateQueryResponse> calculateQuery(CalculateQueryOptions options) {
-		CalculateQueryCommand calculateQuery = getApplicationContext().getBean(CalculateQueryCommand.class);
-		calculateQuery.setoAuthClient(oAuthClient);
-		calculateQuery.setSftp(sftp);
-		ResponseContainer<CalculateQueryResponse> result = calculateQuery.executeCommand(options);
+		calculateQueryBean.setoAuthClient(oAuthClient);
+		calculateQueryBean.setSftp(sftp);
+		ResponseContainer<CalculateQueryResponse> result = calculateQueryBean.executeCommand(options);
 
 		return result;
 	}
 
 	public ResponseContainer<GetListMetaDataResponse> getListMetaData(GetListMetaDataOptions options) {
-		GetListMetaDataCommand getListMetaData = getApplicationContext().getBean(GetListMetaDataCommand.class);
-		getListMetaData.setoAuthClient(oAuthClient);
-		getListMetaData.setSftp(sftp);
-		ResponseContainer<GetListMetaDataResponse> result = getListMetaData.executeCommand(options);
+		getListMetaDataBean.setoAuthClient(oAuthClient);
+		getListMetaDataBean.setSftp(sftp);
+		ResponseContainer<GetListMetaDataResponse> result = getListMetaDataBean.executeCommand(options);
 
 		return result;
 	}
 
 	public ResponseContainer<GetMailingTemplatesResponse> getMailingTemplates(GetMailingTemplatesOptions options) {
-		GetMailingTemplatesCommand getMailingTemplates = getApplicationContext()
-				.getBean(GetMailingTemplatesCommand.class);
-		getMailingTemplates.setoAuthClient(oAuthClient);
-		getMailingTemplates.setSftp(sftp);
-		ResponseContainer<GetMailingTemplatesResponse> result = getMailingTemplates.executeCommand(options);
+
+		getMailingTemplatesBean.setoAuthClient(oAuthClient);
+		getMailingTemplatesBean.setSftp(sftp);
+		ResponseContainer<GetMailingTemplatesResponse> result = getMailingTemplatesBean.executeCommand(options);
 
 		return result;
 	}
 
 	public ResponseContainer<PurgeDataResponse> purgeData(PurgeDataOptions options) {
-		PurgeDataCommand purgeData = getApplicationContext().getBean(PurgeDataCommand.class);
-		purgeData.setoAuthClient(oAuthClient);
-		purgeData.setSftp(sftp);
-		ResponseContainer<PurgeDataResponse> result = purgeData.executeCommand(options);
+		purgeDataBean.setoAuthClient(oAuthClient);
+		purgeDataBean.setSftp(sftp);
+		ResponseContainer<PurgeDataResponse> result = purgeDataBean.executeCommand(options);
 
 		return result;
 	}
 
 	public ResponseContainer<GetReportIdByDateResponse> getReportIdByDate(GetReportIdByDateOptions options) {
-		GetReportIdByDateCommand getReportIdByDate = getApplicationContext().getBean(GetReportIdByDateCommand.class);
-		getReportIdByDate.setoAuthClient(oAuthClient);
-		getReportIdByDate.setSftp(sftp);
-		ResponseContainer<GetReportIdByDateResponse> result = getReportIdByDate.executeCommand(options);
+		getReportIdByDateBean.setoAuthClient(oAuthClient);
+		getReportIdByDateBean.setSftp(sftp);
+		ResponseContainer<GetReportIdByDateResponse> result = getReportIdByDateBean.executeCommand(options);
 
 		return result;
 	}
 
 	public ResponseContainer<GetSentMailingsForOrgResponse> getSentMailingsForOrg(
 			GetSentMailingsForOrgOptions options) {
-		GetSentMailingsForOrgCommand getSentMailingsForOrg = getApplicationContext()
-				.getBean(GetSentMailingsForOrgCommand.class);
-		getSentMailingsForOrg.setoAuthClient(oAuthClient);
-		getSentMailingsForOrg.setSftp(sftp);
-		ResponseContainer<GetSentMailingsForOrgResponse> result = getSentMailingsForOrg.executeCommand(options);
+
+		getSentMailingsForOrgBean.setoAuthClient(oAuthClient);
+		getSentMailingsForOrgBean.setSftp(sftp);
+		ResponseContainer<GetSentMailingsForOrgResponse> result = getSentMailingsForOrgBean.executeCommand(options);
 
 		return result;
 	}
 
 	public ResponseContainer<GetSentMailingsForUserResponse> getSentMailingsForUser(
 			GetSentMailingsForUserOptions options) {
-		GetSentMailingsForUserCommand getSentMailingsForUser = getApplicationContext()
-				.getBean(GetSentMailingsForUserCommand.class);
-		getSentMailingsForUser.setoAuthClient(oAuthClient);
-		getSentMailingsForUser.setSftp(sftp);
-		ResponseContainer<GetSentMailingsForUserResponse> result = getSentMailingsForUser.executeCommand(options);
+
+		getSentMailingsForUserBean.setoAuthClient(oAuthClient);
+		getSentMailingsForUserBean.setSftp(sftp);
+		ResponseContainer<GetSentMailingsForUserResponse> result = getSentMailingsForUserBean.executeCommand(options);
 
 		return result;
 	}
 
 	public ResponseContainer<GetSentMailingsForListResponse> getSentMailingsForList(
 			GetSentMailingsForListOptions options) {
-		GetSentMailingsForListCommand getSentMailingsForList = getApplicationContext()
-				.getBean(GetSentMailingsForListCommand.class);
-		getSentMailingsForList.setoAuthClient(oAuthClient);
-		getSentMailingsForList.setSftp(sftp);
-		ResponseContainer<GetSentMailingsForListResponse> result = getSentMailingsForList.executeCommand(options);
+
+		getSentMailingsForListBean.setoAuthClient(oAuthClient);
+		getSentMailingsForListBean.setSftp(sftp);
+		ResponseContainer<GetSentMailingsForListResponse> result = getSentMailingsForListBean.executeCommand(options);
 
 		return result;
 	}
 
 	public ResponseContainer<ExportMailingTemplateResponse> exportMailingTemplate(
 			ExportMailingTemplateOptions options) {
-		ExportMailingTemplateCommand exportMailingTemplate = getApplicationContext()
-				.getBean(ExportMailingTemplateCommand.class);
-		exportMailingTemplate.setoAuthClient(oAuthClient);
-		exportMailingTemplate.setSftp(sftp);
-		ResponseContainer<ExportMailingTemplateResponse> result = exportMailingTemplate.executeCommand(options);
+
+		exportMailingTemplateBean.setoAuthClient(oAuthClient);
+		exportMailingTemplateBean.setSftp(sftp);
+		ResponseContainer<ExportMailingTemplateResponse> result = exportMailingTemplateBean.executeCommand(options);
 
 		return result;
 	}
 
 	public ResponseContainer<AddContactToContactListResponse> addContactToContactList(
 			AddContactToContactListOptions options) {
-		AddContactToContactListCommand addContactToContactList = getApplicationContext()
-				.getBean(AddContactToContactListCommand.class);
-		addContactToContactList.setoAuthClient(oAuthClient);
-		addContactToContactList.setSftp(sftp);
-		ResponseContainer<AddContactToContactListResponse> result = addContactToContactList.executeCommand(options);
+
+		addContactToContactListBean.setoAuthClient(oAuthClient);
+		addContactToContactListBean.setSftp(sftp);
+		ResponseContainer<AddContactToContactListResponse> result = addContactToContactListBean.executeCommand(options);
 
 		return result;
 	}
 
 	public ResponseContainer<AddContactToProgramResponse> addContactToProgram(AddContactToProgramOptions options) {
-		AddContactToProgramCommand addContactToProgram = getApplicationContext()
-				.getBean(AddContactToProgramCommand.class);
-		addContactToProgram.setoAuthClient(oAuthClient);
-		addContactToProgram.setSftp(sftp);
-		ResponseContainer<AddContactToProgramResponse> result = addContactToProgram.executeCommand(options);
+
+		addContactToProgramBean.setoAuthClient(oAuthClient);
+		addContactToProgramBean.setSftp(sftp);
+		ResponseContainer<AddContactToProgramResponse> result = addContactToProgramBean.executeCommand(options);
 
 		return result;
 	}
 
 	public ResponseContainer<GetAggregateTrackingForOrgResponse> getAggregateTrackingForOrg(
 			GetAggregateTrackingForOrgOptions options) {
-		GetAggregateTrackingForOrgCommand getAggregateTrackingForOrg = getApplicationContext()
-				.getBean(GetAggregateTrackingForOrgCommand.class);
-		getAggregateTrackingForOrg.setoAuthClient(oAuthClient);
-		getAggregateTrackingForOrg.setSftp(sftp);
-		ResponseContainer<GetAggregateTrackingForOrgResponse> result = getAggregateTrackingForOrg
+
+		getAggregateTrackingForOrgBean.setoAuthClient(oAuthClient);
+		getAggregateTrackingForOrgBean.setSftp(sftp);
+		ResponseContainer<GetAggregateTrackingForOrgResponse> result = getAggregateTrackingForOrgBean
 				.executeCommand(options);
 
 		return result;
@@ -443,11 +350,10 @@ public class Engage {
 
 	public ResponseContainer<GetAggregateTrackingForMailingResponse> getAggregateTrackingForMailing(
 			GetAggregateTrackingForMailingOptions options) {
-		GetAggregateTrackingForMailingCommand getAggregateTrackingForMailing = getApplicationContext()
-				.getBean(GetAggregateTrackingForMailingCommand.class);
-		getAggregateTrackingForMailing.setoAuthClient(oAuthClient);
-		getAggregateTrackingForMailing.setSftp(sftp);
-		ResponseContainer<GetAggregateTrackingForMailingResponse> result = getAggregateTrackingForMailing
+
+		getAggregateTrackingForMailingBean.setoAuthClient(oAuthClient);
+		getAggregateTrackingForMailingBean.setSftp(sftp);
+		ResponseContainer<GetAggregateTrackingForMailingResponse> result = getAggregateTrackingForMailingBean
 				.executeCommand(options);
 
 		return result;
@@ -455,21 +361,19 @@ public class Engage {
 
 	public ResponseContainer<GetAggregateTrackingForUserResponse> getAggregateTrackingForUser(
 			GetAggregateTrackingForUserOptions options) {
-		GetAggregateTrackingForUserCommand getAggregateTrackingForUser = getApplicationContext()
-				.getBean(GetAggregateTrackingForUserCommand.class);
-		getAggregateTrackingForUser.setoAuthClient(oAuthClient);
-		getAggregateTrackingForUser.setSftp(sftp);
-		ResponseContainer<GetAggregateTrackingForUserResponse> result = getAggregateTrackingForUser
+
+		getAggregateTrackingForUserBean.setoAuthClient(oAuthClient);
+		getAggregateTrackingForUserBean.setSftp(sftp);
+		ResponseContainer<GetAggregateTrackingForUserResponse> result = getAggregateTrackingForUserBean
 				.executeCommand(options);
 
 		return result;
 	}
 
 	public ResponseContainer<ImportListResponse> importList(ImportListOptions options) {
-		ImportListCommand importList = getApplicationContext().getBean(ImportListCommand.class);
-		importList.setoAuthClient(oAuthClient);
-		importList.setSftp(sftp);
-		ResponseContainer<ImportListResponse> result = importList.executeCommand(options);
+		importListBean.setoAuthClient(oAuthClient);
+		importListBean.setSftp(sftp);
+		ResponseContainer<ImportListResponse> result = importListBean.executeCommand(options);
 
 		return result;
 	}
@@ -484,70 +388,69 @@ public class Engage {
 
 	public ResponseContainer<RawRecipientDataExportResponse> rawRecipientDataExport(
 			RawRecipientDataExportOptions options) {
-		RawRecipientDataExportCommand rawRecipientDataExport = getApplicationContext()
-				.getBean(RawRecipientDataExportCommand.class);
-		rawRecipientDataExport.setoAuthClient(oAuthClient);
-		rawRecipientDataExport.setSftp(sftp);
-		ResponseContainer<RawRecipientDataExportResponse> result = rawRecipientDataExport.executeCommand(options);
+		rawRecipientDataExportBean.setoAuthClient(oAuthClient);
+		rawRecipientDataExportBean.setSftp(sftp);
+		ResponseContainer<RawRecipientDataExportResponse> result = rawRecipientDataExportBean.executeCommand(options);
 
 		return result;
 	}
 
 	public ResponseContainer<AddListColumnResponse> addListColumn(AddListColumnOptions options) {
-		AddListColumnCommand addListColumn = getApplicationContext().getBean(AddListColumnCommand.class);
-		addListColumn.setoAuthClient(oAuthClient);
-		addListColumn.setSftp(sftp);
-		ResponseContainer<AddListColumnResponse> result = addListColumn.executeCommand(options);
+		addListColumnBean.setoAuthClient(oAuthClient);
+		addListColumnBean.setSftp(sftp);
+		ResponseContainer<AddListColumnResponse> result = addListColumnBean.executeCommand(options);
 
 		return result;
 	}
 
 	public ResponseContainer<SetColumnValueResponse> setColumnValue(SetColumnValueOptions options) {
-		SetColumnValueCommand setColumnValue = getApplicationContext().getBean(SetColumnValueCommand.class);
-		setColumnValue.setoAuthClient(oAuthClient);
-		setColumnValue.setSftp(sftp);
-		ResponseContainer<SetColumnValueResponse> result = setColumnValue.executeCommand(options);
+		setColumnValueBean.setoAuthClient(oAuthClient);
+		setColumnValueBean.setSftp(sftp);
+		ResponseContainer<SetColumnValueResponse> result = setColumnValueBean.executeCommand(options);
 
 		return result;
 	}
 
 	public ResponseContainer<ImportTableResponse> importTable(ImportTableOptions options) {
-		ImportTableCommand importTable = getApplicationContext().getBean(ImportTableCommand.class);
-		importTable.setoAuthClient(oAuthClient);
-		importTable.setSftp(sftp);
-		ResponseContainer<ImportTableResponse> result = importTable.executeCommand(options);
+		importTableBean.setoAuthClient(oAuthClient);
+		importTableBean.setSftp(sftp);
+		ResponseContainer<ImportTableResponse> result = importTableBean.executeCommand(options);
 
 		return result;
 	}
 
 	public ResponseContainer<ListRecipientMailingsResponse> listRecipientMailings(
 			ListRecipientMailingsOptions options) {
-		ListRecipientMailingsCommand listRecipientMailings = getApplicationContext()
-				.getBean(ListRecipientMailingsCommand.class);
-		listRecipientMailings.setoAuthClient(oAuthClient);
-		listRecipientMailings.setSftp(sftp);
-		ResponseContainer<ListRecipientMailingsResponse> result = listRecipientMailings.executeCommand(options);
+
+		listRecipientMailingsBean.setoAuthClient(oAuthClient);
+		listRecipientMailingsBean.setSftp(sftp);
+		ResponseContainer<ListRecipientMailingsResponse> result = listRecipientMailingsBean.executeCommand(options);
 
 		return result;
 	}
 
 	public ResponseContainer<WebTrackingDataExportResponse> webTrackingDataExport(
 			WebTrackingDataExportOptions options) {
-		WebTrackingDataExportCommand webTrackingDataExport = getApplicationContext()
-				.getBean(WebTrackingDataExportCommand.class);
-		webTrackingDataExport.setoAuthClient(oAuthClient);
-		webTrackingDataExport.setSftp(sftp);
-		ResponseContainer<WebTrackingDataExportResponse> result = webTrackingDataExport.executeCommand(options);
+
+		webTrackingDataExportBean.setoAuthClient(oAuthClient);
+		webTrackingDataExportBean.setSftp(sftp);
+		ResponseContainer<WebTrackingDataExportResponse> result = webTrackingDataExportBean.executeCommand(options);
 
 		return result;
 	}
 
 	public ResponseContainer<PreviewMailingResponse> previewMailing(PreviewMailingOptions options) {
-		PreviewMailingCommand previewMailing = getApplicationContext().getBean(PreviewMailingCommand.class);
-		previewMailing.setoAuthClient(oAuthClient);
-		previewMailing.setSftp(sftp);
-		ResponseContainer<PreviewMailingResponse> result = previewMailing.executeCommand(options);
+		previewMailingBean.setoAuthClient(oAuthClient);
+		previewMailingBean.setSftp(sftp);
+		ResponseContainer<PreviewMailingResponse> result = previewMailingBean.executeCommand(options);
 
+		return result;
+	}
+
+	public ResponseContainer<ScheduleMailingResponse> scheduleMailing(ScheduleMailingOptions options) {
+		scheduleMailingBean.setoAuthClient(oAuthClient);
+		scheduleMailingBean.setSftp(sftp);
+		ResponseContainer<ScheduleMailingResponse> result = scheduleMailingBean.executeCommand(options);
 		return result;
 	}
 
@@ -628,4 +531,19 @@ public class Engage {
 		this.purgeTableBean = purgeTableBean;
 	}
 
+	protected void setRawRecipientDataExportBean(RawRecipientDataExportCommand rawRecipientDataExportBean) {
+		this.rawRecipientDataExportBean = rawRecipientDataExportBean;
+	}
+
+	protected void setAddListColumnBean(AddListColumnCommand addListColumnBean) {
+		this.addListColumnBean = addListColumnBean;
+	}
+
+	protected void setSetColumnValueBean(SetColumnValueCommand setColumnValueBean) {
+		this.setColumnValueBean = setColumnValueBean;
+	}
+
+	protected void setScheduleMailingBean(ScheduleMailingCommand scheduleMailingBean) {
+		this.scheduleMailingBean = scheduleMailingBean;
+	}
 }
